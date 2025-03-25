@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.about = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.privileges = new System.Windows.Forms.Label();
             this.verLabel = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,26 +91,40 @@
             this.label25 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
+            this.label42 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.undate = new System.Windows.Forms.ComboBox();
+            this.update = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.defender = new System.Windows.Forms.ComboBox();
+            this.open = new System.Windows.Forms.TabPage();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.label41 = new System.Windows.Forms.Label();
+            this.button16 = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.button17 = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开配置GToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.另存为配置HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
+            this.保存配置JToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label44 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.about.SuspendLayout();
             this.explorer.SuspendLayout();
             this.system.SuspendLayout();
+            this.open.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,6 +133,7 @@
             this.tabControl1.Controls.Add(this.about);
             this.tabControl1.Controls.Add(this.explorer);
             this.tabControl1.Controls.Add(this.system);
+            this.tabControl1.Controls.Add(this.open);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
@@ -129,7 +149,10 @@
             // 
             this.about.Controls.Add(this.button15);
             this.about.Controls.Add(this.button14);
+            this.about.Controls.Add(this.privileges);
             this.about.Controls.Add(this.verLabel);
+            this.about.Controls.Add(this.label44);
+            this.about.Controls.Add(this.label43);
             this.about.Controls.Add(this.label4);
             this.about.Controls.Add(this.label3);
             this.about.Controls.Add(this.label2);
@@ -142,6 +165,38 @@
             this.about.Text = "关于使用";
             this.about.UseVisualStyleBackColor = true;
             // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button15.Location = new System.Drawing.Point(791, 59);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(177, 34);
+            this.button15.TabIndex = 9;
+            this.button15.Text = "检查更新";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.Button15_Click);
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button14.Location = new System.Drawing.Point(791, 19);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(177, 34);
+            this.button14.TabIndex = 9;
+            this.button14.Text = "在Github上查看项目";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.Button14_Click_1);
+            // 
+            // privileges
+            // 
+            this.privileges.AutoSize = true;
+            this.privileges.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.privileges.Location = new System.Drawing.Point(99, 125);
+            this.privileges.Name = "privileges";
+            this.privileges.Size = new System.Drawing.Size(74, 21);
+            this.privileges.TabIndex = 8;
+            this.privileges.Text = "{version}";
+            // 
             // verLabel
             // 
             this.verLabel.AutoSize = true;
@@ -151,6 +206,16 @@
             this.verLabel.Size = new System.Drawing.Size(74, 21);
             this.verLabel.TabIndex = 8;
             this.verLabel.Text = "{version}";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label43.Location = new System.Drawing.Point(5, 125);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(88, 21);
+            this.label43.TabIndex = 7;
+            this.label43.Text = "当前权限:  ";
             // 
             // label4
             // 
@@ -416,6 +481,7 @@
             this.object3d.Name = "object3d";
             this.object3d.Size = new System.Drawing.Size(93, 25);
             this.object3d.TabIndex = 60;
+            this.object3d.SelectionChangeCommitted += new System.EventHandler(this.Object3d_Click);
             // 
             // label8
             // 
@@ -452,6 +518,7 @@
             this.label5.Size = new System.Drawing.Size(202, 21);
             this.label5.TabIndex = 57;
             this.label5.Text = "需要重启计算机以完成更改";
+            this.label5.Visible = false;
             // 
             // label21
             // 
@@ -463,6 +530,7 @@
             this.label21.Size = new System.Drawing.Size(234, 21);
             this.label21.TabIndex = 57;
             this.label21.Text = "需要重启资源管理器以完成更改";
+            this.label21.Visible = false;
             // 
             // label6
             // 
@@ -474,6 +542,7 @@
             this.label6.Size = new System.Drawing.Size(234, 21);
             this.label6.TabIndex = 57;
             this.label6.Text = "需要重启资源管理器以完成更改";
+            this.label6.Visible = false;
             // 
             // label9
             // 
@@ -509,6 +578,7 @@
             this.hidenfile.Name = "hidenfile";
             this.hidenfile.Size = new System.Drawing.Size(93, 25);
             this.hidenfile.TabIndex = 50;
+            this.hidenfile.SelectionChangeCommitted += new System.EventHandler(this.Hidenfile_Click);
             // 
             // label11
             // 
@@ -534,6 +604,7 @@
             this.extension.Name = "extension";
             this.extension.Size = new System.Drawing.Size(93, 25);
             this.extension.TabIndex = 48;
+            this.extension.SelectionChangeCommitted += new System.EventHandler(this.Extension_Click);
             // 
             // system
             // 
@@ -561,12 +632,14 @@
             this.system.Controls.Add(this.label25);
             this.system.Controls.Add(this.button3);
             this.system.Controls.Add(this.label24);
+            this.system.Controls.Add(this.button22);
+            this.system.Controls.Add(this.label42);
             this.system.Controls.Add(this.button2);
             this.system.Controls.Add(this.label23);
             this.system.Controls.Add(this.label22);
             this.system.Controls.Add(this.label7);
             this.system.Controls.Add(this.label12);
-            this.system.Controls.Add(this.undate);
+            this.system.Controls.Add(this.update);
             this.system.Controls.Add(this.label1);
             this.system.Controls.Add(this.defender);
             this.system.Location = new System.Drawing.Point(4, 29);
@@ -776,6 +849,7 @@
             this.button5.TabIndex = 71;
             this.button5.Text = "打开";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // label26
             // 
@@ -783,9 +857,9 @@
             this.label26.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label26.Location = new System.Drawing.Point(12, 380);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(157, 21);
+            this.label26.Size = new System.Drawing.Size(93, 21);
             this.label26.TabIndex = 70;
-            this.label26.Text = "打开 \"桌面图标设置\"";
+            this.label26.Text = "打开 \"服务\"";
             // 
             // button4
             // 
@@ -796,6 +870,7 @@
             this.button4.TabIndex = 69;
             this.button4.Text = "打开";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // label25
             // 
@@ -805,7 +880,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(157, 21);
             this.label25.TabIndex = 68;
-            this.label25.Text = "打开 \"桌面图标设置\"";
+            this.label25.Text = "打开 \"本地用户和组\"";
             // 
             // button3
             // 
@@ -816,6 +891,7 @@
             this.button3.TabIndex = 67;
             this.button3.Text = "打开";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // label24
             // 
@@ -823,9 +899,30 @@
             this.label24.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label24.Location = new System.Drawing.Point(12, 450);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(157, 21);
+            this.label24.Size = new System.Drawing.Size(125, 21);
             this.label24.TabIndex = 66;
-            this.label24.Text = "打开 \"桌面图标设置\"";
+            this.label24.Text = "打开 \"磁盘管理\"";
+            // 
+            // button22
+            // 
+            this.button22.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button22.Location = new System.Drawing.Point(261, 520);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(93, 29);
+            this.button22.TabIndex = 65;
+            this.button22.Text = "打开";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.Taskschd_Click);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label42.Location = new System.Drawing.Point(12, 520);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(157, 21);
+            this.label42.TabIndex = 64;
+            this.label42.Text = "打开 \"任务计划程序\"";
             // 
             // button2
             // 
@@ -836,6 +933,7 @@
             this.button2.TabIndex = 65;
             this.button2.Text = "打开";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // label23
             // 
@@ -843,9 +941,9 @@
             this.label23.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.Location = new System.Drawing.Point(12, 485);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(157, 21);
+            this.label23.Size = new System.Drawing.Size(109, 21);
             this.label23.TabIndex = 64;
-            this.label23.Text = "打开 \"桌面图标设置\"";
+            this.label23.Text = "打开 \"组策略\"";
             // 
             // label22
             // 
@@ -857,6 +955,7 @@
             this.label22.Size = new System.Drawing.Size(202, 21);
             this.label22.TabIndex = 58;
             this.label22.Text = "需要重启计算机以完成更改";
+            this.label22.Visible = false;
             // 
             // label7
             // 
@@ -868,6 +967,7 @@
             this.label7.Size = new System.Drawing.Size(202, 21);
             this.label7.TabIndex = 58;
             this.label7.Text = "需要重启计算机以完成更改";
+            this.label7.Visible = false;
             // 
             // label12
             // 
@@ -879,20 +979,21 @@
             this.label12.TabIndex = 27;
             this.label12.Text = "Windows Update";
             // 
-            // undate
+            // update
             // 
-            this.undate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.undate.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.undate.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.undate.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.undate.FormattingEnabled = true;
-            this.undate.Items.AddRange(new object[] {
+            this.update.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.update.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.update.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.update.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.update.FormattingEnabled = true;
+            this.update.Items.AddRange(new object[] {
             "启用",
             "禁用"});
-            this.undate.Location = new System.Drawing.Point(261, 34);
-            this.undate.Name = "undate";
-            this.undate.Size = new System.Drawing.Size(93, 25);
-            this.undate.TabIndex = 26;
+            this.update.Location = new System.Drawing.Point(261, 34);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(93, 25);
+            this.update.TabIndex = 26;
+            this.update.SelectedIndexChanged += new System.EventHandler(this.Undate_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -918,6 +1019,132 @@
             this.defender.Name = "defender";
             this.defender.Size = new System.Drawing.Size(93, 25);
             this.defender.TabIndex = 24;
+            this.defender.SelectionChangeCommitted += new System.EventHandler(this.Defender_SelectionChangeCommitted);
+            // 
+            // open
+            // 
+            this.open.Controls.Add(this.button21);
+            this.open.Controls.Add(this.button19);
+            this.open.Controls.Add(this.label41);
+            this.open.Controls.Add(this.button16);
+            this.open.Controls.Add(this.label39);
+            this.open.Controls.Add(this.button18);
+            this.open.Controls.Add(this.label36);
+            this.open.Controls.Add(this.label38);
+            this.open.Controls.Add(this.button17);
+            this.open.Controls.Add(this.label37);
+            this.open.Location = new System.Drawing.Point(4, 29);
+            this.open.Name = "open";
+            this.open.Padding = new System.Windows.Forms.Padding(3);
+            this.open.Size = new System.Drawing.Size(976, 703);
+            this.open.TabIndex = 3;
+            this.open.Text = "非常用文件夹位置";
+            this.open.UseVisualStyleBackColor = true;
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button21.Location = new System.Drawing.Point(256, 146);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(93, 29);
+            this.button21.TabIndex = 71;
+            this.button21.Text = "打开";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.Button21_Click);
+            // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button19.Location = new System.Drawing.Point(256, 76);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(93, 29);
+            this.button19.TabIndex = 71;
+            this.button19.Text = "打开";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.Button19_Click);
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label41.Location = new System.Drawing.Point(3, 146);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(215, 21);
+            this.label41.TabIndex = 70;
+            this.label41.Text = "打开 \"酷狗音乐 缓存\" 文件夹";
+            // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button16.Location = new System.Drawing.Point(256, 6);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(93, 29);
+            this.button16.TabIndex = 71;
+            this.button16.Text = "打开";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.Button16_Click);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label39.Location = new System.Drawing.Point(3, 76);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(247, 21);
+            this.label39.TabIndex = 70;
+            this.label39.Text = "打开 \"英伟达 显卡安装包\" 文件夹";
+            // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button18.Location = new System.Drawing.Point(256, 111);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(93, 29);
+            this.button18.TabIndex = 69;
+            this.button18.Text = "打开";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.Button18_Click);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label36.Location = new System.Drawing.Point(3, 6);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(254, 21);
+            this.label36.TabIndex = 70;
+            this.label36.Text = "打开 \"DirectX 着色器缓存\" 文件夹";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label38.Location = new System.Drawing.Point(7, 111);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(157, 21);
+            this.label38.TabIndex = 68;
+            this.label38.Text = "打开 \"Temp\" 文件夹";
+            // 
+            // button17
+            // 
+            this.button17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button17.Location = new System.Drawing.Point(256, 41);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(93, 29);
+            this.button17.TabIndex = 69;
+            this.button17.Text = "打开";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.Button17_Click);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label37.Location = new System.Drawing.Point(7, 41);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(247, 21);
+            this.label37.TabIndex = 68;
+            this.label37.Text = "打开 \"英伟达 着色器缓存\" 文件夹";
             // 
             // menuStrip1
             // 
@@ -934,6 +1161,7 @@
             // 
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开配置GToolStripMenuItem,
+            this.保存配置JToolStripMenuItem,
             this.另存为配置HToolStripMenuItem,
             this.退出TToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
@@ -943,21 +1171,21 @@
             // 打开配置GToolStripMenuItem
             // 
             this.打开配置GToolStripMenuItem.Name = "打开配置GToolStripMenuItem";
-            this.打开配置GToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.打开配置GToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打开配置GToolStripMenuItem.Text = "打开配置(&G)";
             this.打开配置GToolStripMenuItem.Click += new System.EventHandler(this.打开配置GToolStripMenuItem_Click);
             // 
             // 另存为配置HToolStripMenuItem
             // 
             this.另存为配置HToolStripMenuItem.Name = "另存为配置HToolStripMenuItem";
-            this.另存为配置HToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.另存为配置HToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.另存为配置HToolStripMenuItem.Text = "另存为配置(&H)";
             this.另存为配置HToolStripMenuItem.Click += new System.EventHandler(this.另存为配置HToolStripMenuItem_Click);
             // 
             // 退出TToolStripMenuItem
             // 
             this.退出TToolStripMenuItem.Name = "退出TToolStripMenuItem";
-            this.退出TToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.退出TToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.退出TToolStripMenuItem.Text = "退出 (&T)";
             this.退出TToolStripMenuItem.Click += new System.EventHandler(this.退出TToolStripMenuItem_Click);
             // 
@@ -968,26 +1196,23 @@
             this.操作ToolStripMenuItem.Text = "开始执行 (&F5)";
             this.操作ToolStripMenuItem.Click += new System.EventHandler(this.操作ToolStripMenuItem_Click);
             // 
-            // button14
+            // 保存配置JToolStripMenuItem
             // 
-            this.button14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button14.Location = new System.Drawing.Point(791, 19);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(177, 34);
-            this.button14.TabIndex = 9;
-            this.button14.Text = "在Github上查看项目";
-            this.button14.UseVisualStyleBackColor = true;
+            this.保存配置JToolStripMenuItem.Name = "保存配置JToolStripMenuItem";
+            this.保存配置JToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存配置JToolStripMenuItem.Text = "保存配置 (&J)";
+            this.保存配置JToolStripMenuItem.Click += new System.EventHandler(this.保存配置JToolStripMenuItem_Click);
             // 
-            // button15
+            // label44
             // 
-            this.button15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button15.Location = new System.Drawing.Point(791, 59);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(177, 34);
-            this.button15.TabIndex = 9;
-            this.button15.Text = "检查更新";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.Button15_Click);
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label44.ForeColor = System.Drawing.Color.Red;
+            this.label44.Location = new System.Drawing.Point(8, 277);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(442, 21);
+            this.label44.TabIndex = 7;
+            this.label44.Text = "提示: 请勿使用 TrustedInstaller 和 SYSTEM 权限打开此程序";
             // 
             // Form1
             // 
@@ -996,6 +1221,7 @@
             this.ClientSize = new System.Drawing.Size(984, 761);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "NinjaMagisk Windows Tools - by Rainbow SPY   version ";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1006,6 +1232,8 @@
             this.explorer.PerformLayout();
             this.system.ResumeLayout(false);
             this.system.PerformLayout();
+            this.open.ResumeLayout(false);
+            this.open.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1040,7 +1268,7 @@
         private System.Windows.Forms.ToolStripMenuItem 退出TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 操作ToolStripMenuItem;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox undate;
+        private System.Windows.Forms.ComboBox update;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
@@ -1089,6 +1317,23 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.TabPage open;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label privileges;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.ToolStripMenuItem 保存配置JToolStripMenuItem;
+        private System.Windows.Forms.Label label44;
     }
 }
 
