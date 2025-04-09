@@ -1,4 +1,4 @@
-﻿using NinjaMagisk;
+using NinjaMagisk;
 using System;
 using System.Diagnostics;
 using System.Security.Principal;
@@ -13,7 +13,7 @@ namespace NinjaMagiskWindowsTools
             InitializeComponent();
             tabControl1.TabPages[tabControl1.SelectedIndex].Focus();
         }
-        public int[] s = { 0, 0, 0 };//用来记录窗体是否打开过
+        public int[] s = { 0, 0, 0 }; //Used to record whether the form has been opened
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             tabControl1.TabPages[tabControl1.SelectedIndex].Focus();
@@ -26,49 +26,49 @@ namespace NinjaMagiskWindowsTools
             {
                 System.IO.File.Create(cfgPath).Close();
             }
-            // 获取当前Windows身份
+            // Get the current Windows identity
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
 
-            // 获取当前主体
+            // Get the current subject
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             privileges.Text = identity.Name + "\n";
             if (principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
-                privileges.Text += "管理员\n";
+                privileges.Text += "Administrator\n";
                 SaveConfigOnCurrentUser();
             }
 
-            // 构建权限信息字符串
+            // Build permission information string
             if (identity.IsSystem)
-                privileges.Text += "系统账户\n";
+                privileges.Text += "System Account\n";
             if (identity.IsAnonymous)
-                privileges.Text += "匿名账户\n";
+                privileges.Text += "Anonymous account\n";
             if (identity.IsGuest)
-                privileges.Text += "访客账户\n";
-            //// string permissionInfo = $"用户名: {identity.Name}\n" +
-            //                        $"身份验证类型: {identity.AuthenticationType}\n" +
-            //                        $"是否为管理员: {principal.IsInRole(WindowsBuiltInRole.Administrator)}\n" +
-            //                        $"是否为系统账户: {}\n" +
-            //                        $"是否为匿名账户: {}\n" +
-            //                        $"是否为访客账户: {}\n" +
-            //                        $"令牌: {identity.Token}";
+                privileges.Text += "Guest Account\n";
+            //// string permissionInfo = $"Username: {identity.Name}\n" +
+            // $"Authentication type: {identity.AuthenticationType}\n" +
+            // $"Is it an administrator: {principal.IsInRole(WindowsBuiltInRole.Administrator)}\n" +
+            // $"Is it a system account: {}\n" +
+            // $"Is it an anonymous account: {}\n" +
+            // $"Is it a guest account: {}\n" +
+            // $"token: {identity.Token}";
             verLabel.Text = Application.ProductVersion;
             this.Text += Application.ProductVersion;
             tabControl1.TabPages[tabControl1.SelectedIndex].Focus();
             object3d.SelectedItem = "是";
-            desktop.SelectedItem = "是";
-            doc.SelectedItem = "是";
+            desktop.SelectedItem = "Yes";
+            doc.SelectedItem = "Yes";
             download.SelectedItem = "是";
-            music.SelectedItem = "是";
-            photo.SelectedItem = "是";
-            video.SelectedItem = "是";
+            music.SelectedItem = "Yes";
+            photo.SelectedItem = "Yes";
+            video.SelectedItem = "Yes";
 
         }
         private void SaveConfigOnCurrentUser()
         {
 
         }
-        private void 操作ToolStripMenuItem_Click(object sender, EventArgs e) //开始执行
+        private void operation ToolStripMenuItem_Click(object sender, EventArgs e) //Start execution
         {
             Windows.Explorer.ThisPCFolders._3DObject(object3d.SelectedItem is "是" ? true : false);
             Windows.Explorer.ThisPCFolders.Desktop(desktop.SelectedItem is "是" ? true : false);
@@ -80,25 +80,25 @@ namespace NinjaMagiskWindowsTools
             if (hidenfile.SelectedItem != null)
                 Windows.Explorer.ShowHiddenFile(hidenfile.SelectedItem is "显示" ? true : false);
             if (openfolder.SelectedItem != null)
-                if (openfolder.SelectedItem is "此电脑")
+                if (openfolder.SelectedItem is "This Computer")
                     Windows.Explorer.ExplorerLaunchTo.ThisPC();
                 else
                     Windows.Explorer.ExplorerLaunchTo.QuickAcess();
             if (extension.SelectedItem != null)
                 Windows.Explorer.ShowFileExtension(extension.SelectedItem is "显示" ? true : false);
             if (defender.SelectedItem != null)
-                if (defender.SelectedItem is "启用")
+                if (defender.SelectedItem is "Enable")
                     Windows.WindowsSecurityCenter.Enable();
                 else
                     Windows.WindowsSecurityCenter.Disable();
         }
-        private void 打开配置GToolStripMenuItem_Click(object sender, EventArgs e)
+        private void open configuration GToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 FileName = "config.ini",
-                DefaultExt = "ini",  // 默认扩展名
-                Filter = "配置信息 (*.ini)|*.ini",
+                DefaultExt = "ini", // default extension
+                Filter = "Configuration Information (*.ini)|*.ini",
                 InitialDirectory = Application.StartupPath,
                 RestoreDirectory = true,
             };
@@ -121,9 +121,9 @@ namespace NinjaMagiskWindowsTools
             string defender = NinjaMagisk.Text.Config.ReadConfig(openedfilepath, "Setting.Windows.WindowsDefender");
             string update = NinjaMagisk.Text.Config.ReadConfig(openedfilepath, "Setting.Windows.WindowsUpdate");
         }
-        private void 保存配置JToolStripMenuItem_Click(object sender, EventArgs e)
+        private void save configuration JToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BothConfig($"{Application.StartupPath}\\config.ini"); //保存配置
+            BothConfig($"{Application.StartupPath}\\config.ini"); //Save configuration
         }
         private void BothConfig(string savedPath)
         {
@@ -180,14 +180,14 @@ namespace NinjaMagiskWindowsTools
             }
 
         }
-        private void 另存为配置HToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Save as configuration HToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 FileName = "config.ini",
-                DefaultExt = "ini",  // 默认扩展名
-                OverwritePrompt = true,  // 提示是否覆盖
-                Filter = "配置信息 (*.ini)|*.ini",
+                DefaultExt = "ini", // default extension
+                OverwritePrompt = true, // prompt whether to overwrite
+                Filter = "Configuration Information (*.ini)|*.ini",
                 InitialDirectory = Application.StartupPath,
                 RestoreDirectory = true,
             };
@@ -207,17 +207,17 @@ namespace NinjaMagiskWindowsTools
 
         private void Button14_Click(object sender, EventArgs e)
         {
-            Process.Start("ncpa.cpl").Close(); //打开网络连接
+            Process.Start("ncpa.cpl").Close(); //Open the network connection
         }
 
-        private void Button13_Click(object sender, EventArgs e) //打开设备管理器
+        private void Button13_Click(object sender, EventArgs e) //Open the device manager
         {
             Process.Start("devmgmt.msc").Close();
         }
 
         private void Button12_Click(object sender, EventArgs e)
         {
-            Process.Start("taskschd.msc").Close(); //打开任务计划程序
+            Process.Start("taskschd.msc").Close(); //Open the task scheduler
         }
 
         private void Button11_Click(object sender, EventArgs e)
@@ -231,22 +231,22 @@ namespace NinjaMagiskWindowsTools
             {
                 firewallPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.System)}\\Firewall.cpl";
             }
-            Process.Start(firewallPath).Close(); //打开防火墙
+            Process.Start(firewallPath).Close(); //Open the firewall
         }
 
         private void Button10_Click(object sender, EventArgs e)
         {
-            Process.Start("control.exe", "powercfg.cpl").Close(); //打开电源选项
+            Process.Start("control.exe", "powercfg.cpl").Close(); //Open power options
         }
 
         private void Button9_Click(object sender, EventArgs e)
         {
-            Process.Start("control.exe", "system").Close(); //打开系统属性
+            Process.Start("control.exe", "system").Close(); //Open system properties
         }
 
         private void Button8_Click(object sender, EventArgs e)
         {
-            Process.Start("UserAccountControlSettings").Close(); //打开用户账户控制设置
+            Process.Start("UserAccountControlSettings").Close(); //Open User Account Control Settings
         }
 
         private void Button7_Click(object sender, EventArgs e)
@@ -260,21 +260,21 @@ namespace NinjaMagiskWindowsTools
             {
                 features = $"{Environment.GetFolderPath(Environment.SpecialFolder.System)}\\optionalfeatures.exe";
             }
-            Process.Start(features).Close(); //打开Windows功能
+            Process.Start(features).Close(); //Open Windows features
 
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            Process.Start("appwiz.cpl").Close(); //打开程序和功能
+            Process.Start("appwiz.cpl").Close(); //Open programs and functions
         }
 
-        private void Button15_Click(object sender, EventArgs e) //在Github上检查更新
+        private void Button15_Click(object sender, EventArgs e) //Check for updates on Github
         {
             bool v = NinjaMagisk.Network.Ping("api.github.com");
             if (!v)
             {
-                MessageBox.Show("网络连接异常");
+                MessageBox.Show("Network connection abnormality");
                 return;
             }
             var info = NinjaMagisk.Update.GetUpdateJson("https://api.github.com/repos/Rainbow-SPY/NinjaMagisk-Windows-Tools/releases/latest", NinjaMagisk.Update.Platform.Github);
