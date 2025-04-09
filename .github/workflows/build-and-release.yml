@@ -3,8 +3,8 @@ name: Build and Release NinjaMagisk Windows Tools
 on:
   push:
     tags:
-      - 'v*.*.*' # e.g., v1.0.0
-  workflow_dispatch: # Manual trigger
+      - 'v*.*.*'
+  workflow_dispatch:
 
 jobs:
   build-and-release:
@@ -17,24 +17,91 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Set up .NET SDK (required for dotnet-format)
+      # Set up .NET SDK
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.x' # Use a version compatible with your project
+          dotnet-version: '6.0.x'
 
-      # Install dotnet-format
-      - name: Install dotnet-format
-        run: dotnet tool install -g dotnet-format
-
-      # Auto-correct syntax errors in C# files
-      - name: Auto-correct C# syntax
+      # Install Roslyn-based syntax fixer (via a custom script)
+      - name: Install dependencies
         run: |
-          dotnet-format "NinjaMagisk Windows Tools.sln" --include "NinjaMagisk Windows Tools/*.cs" --fix-whitespace --fix-style --fix-analyzers
+          dotnet new console -n SyntaxFixer -f net6.0
+          cd SyntaxFixer
+          dotnet add package Microsoft.CodeAnalysis.CSharp.Workspaces --version 4.8.0
+          dotnet restore
+
+      # Add a script to fix syntax errors
+      - name: Create syntax fixer script
+        shell: pwsh
+        run: |
+          $script = @"
+          using Microsoft.CodeAnalysis;
+          using Microsoft.CodeAnalysis.CSharp;
+          using Microsoft.CodeAnalysis.CSharp.Syntax;
+          using Microsoft.CodeAnalysis.Text;
+          using System;
+          using System.IO;
+          using System.Linq;
+
+          class Program
+          {
+              static void Main(string[] args)
+              {
+                  var filePath = args[0];
+                  var text = File.ReadAllText(filePath);
+                  var tree = CSharpSyntaxTree.ParseText(text);
+                  var root = tree.GetRoot();
+
+                  // Fix missing semicolons
+                  var fixedRoot = root.ReplaceNodes(
+                      root.DescendantNodes().OfType<ExpressionStatementSyntax>(),
+                      (node, _) => node.SemicolonToken.IsMissing ? node.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)) : node
+                  );
+
+                  // Fix missing commas in lists (e.g., AddRange)
+                  fixedRoot = fixedRoot.ReplaceNodes(
+                      root.DescendantNodes().OfType<InitializerExpressionSyntax>(),
+                      (node, _) =>
+                      {
+                          var separators = node.Expressions.GetSeparators();
+                          if (separators.Any(s => s.IsMissing))
+                          {
+                              return node.WithExpressions(
+                                  SyntaxFactory.SeparatedList(
+                                      node.Expressions,
+                                      node.Expressions.GetSeparators().Select(s => s.IsMissing ? SyntaxFactory.Token(SyntaxKind.CommaToken) : s)
+                                  )
+                              );
+                          }
+                          return node;
+                      }
+                  );
+
+                  File.WriteAllText(filePath, fixedRoot.ToFullString());
+                  Console.WriteLine($""Fixed syntax in {filePath}"");
+              }
+          }
+          "@
+          Set-Content -Path "SyntaxFixer/Program.cs" -Value $script
+
+      # Run the syntax fixer on Form1.cs and Form1.Designer.cs
+      - name: Fix syntax errors
+        shell: pwsh
+        run: |
+          cd SyntaxFixer
+          dotnet build -c Release
+          $files = @("..\NinjaMagisk Windows Tools\Form1.cs", "..\NinjaMagisk Windows Tools\Form1.Designer.cs")
+          foreach ($file in $files) {
+              if (Test-Path $file) {
+                  dotnet run --project . $file
+              }
+          }
+          cd ..
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add "NinjaMagisk Windows Tools/*.cs"
-          git commit -m "Auto-correct syntax errors in C# files" || echo "No changes to commit"
+          git add "NinjaMagisk Windows Tools/Form1.cs" "NinjaMagisk Windows Tools/Form1.Designer.cs"
+          git commit -m "Auto-correct syntax errors in Form1.cs and Form1.Designer.cs" || echo "No changes to commit"
           git push || echo "No push needed"
 
       # Set up MSBuild
@@ -49,7 +116,7 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore "NinjaMagisk Windows Tools.sln"
 
-      # Copy NinjaMagisk.Interface.dll to the expected build directory
+      # Copy NinjaMagisk.Interface.dll
       - name: Copy DLL to Build Directory
         shell: pwsh
         run: |
@@ -61,9 +128,8 @@ jobs:
           }
           New-Item -ItemType Directory -Path $targetDir -Force
           Copy-Item -Path $sourceDll -Destination $targetDir -Force
-          Write-Output "Copied $sourceDll to $targetDir"
 
-      # Build the solution with MSBuild
+      # Build the solution
       - name: Build Release
         run: msbuild "NinjaMagisk Windows Tools.sln" -t:Build -p:Configuration=Release -p:SignManifests=false -v:normal
 
@@ -77,7 +143,7 @@ jobs:
             exit 1
           }
 
-      # Package the output into a zip
+      # Package the output
       - name: Package Release
         shell: pwsh
         run: |
@@ -100,7 +166,7 @@ jobs:
           draft: false
           prerelease: false
 
-      # Upload the zip to the release (on tag push)
+      # Upload the zip to the release
       - name: Upload Release Asset
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-release-asset@v1
