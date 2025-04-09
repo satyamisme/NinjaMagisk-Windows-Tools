@@ -51,7 +51,7 @@ jobs:
       - name: Check Build Output
         shell: pwsh
         run: |
-          $exePath = "NinjaMagisk Windows Tools/bin/Release/nmg_wtls.exe"
+          $exePath = "NinjaMagisk Windows Tools/bin/Release/NinjaMagisk Windows Tools.exe"
           if (-Not (Test-Path $exePath)) {
             Write-Error "Build output not found at $exePath!"
             exit 1
