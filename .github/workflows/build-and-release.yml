@@ -29,6 +29,20 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore "NinjaMagisk Windows Tools.sln"
 
+      # Copy NinjaMagisk.Interface.dll to the expected build directory
+      - name: Copy DLL to Build Directory
+        shell: pwsh
+        run: |
+          $sourceDll = "lib/NinjaMagisk.Interface.dll"
+          $targetDir = "NinjaMagisk Windows Tools/bin/Release"
+          if (-Not (Test-Path $sourceDll)) {
+            Write-Error "NinjaMagisk.Interface.dll not found in lib/ folder!"
+            exit 1
+          }
+          New-Item -ItemType Directory -Path $targetDir -Force
+          Copy-Item -Path $sourceDll -Destination $targetDir -Force
+          Write-Output "Copied $sourceDll to $targetDir"
+
       # Build the solution with MSBuild (disable manifest signing)
       - name: Build Release
         run: msbuild "NinjaMagisk Windows Tools.sln" -t:Build -p:Configuration=Release -p:SignManifests=false -v:normal
