@@ -1212,10 +1212,10 @@ namespace NinjaMagiskWindowsTools
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(442, 21);
             this.label44.TabIndex = 7;
-            this.label44.Text = "提示: 请勿使用 TrustedInstaller 和 SYSTEM 权限打开此程序";
+            this.label44.Text = "Tip: Do not use TrustedInstaller and SYSTEM permissions to open this program";
             // 
             // Form1
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 761);
@@ -1263,7 +1263,7 @@ namespace NinjaMagiskWindowsTools
         private System.Windows.Forms.ComboBox defender;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 打开配置GToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem opens the configuration GToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Save As Configuration HToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 操作ToolStripMenuItem;
