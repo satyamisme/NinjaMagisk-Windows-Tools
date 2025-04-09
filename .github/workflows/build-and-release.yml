@@ -3,8 +3,8 @@ name: Build and Release NinjaMagisk Windows Tools
 on:
   push:
     tags:
-      - 'v*.*.*' # Runs on tag push
-  workflow_dispatch: # Allows manual run
+      - 'v*.*.*' # e.g., v1.0.0
+  workflow_dispatch: # Manual trigger
 
 jobs:
   build-and-release:
@@ -17,11 +17,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Set up MSBuild (for .NET Framework projects)
+      # Set up MSBuild
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      # Set up NuGet (for package restoration)
+      # Set up NuGet
       - name: Setup NuGet
         uses: nuget/setup-nuget@v2
 
@@ -29,9 +29,9 @@ jobs:
       - name: Restore NuGet Packages
         run: nuget restore "NinjaMagisk Windows Tools.sln"
 
-      # Build the solution with MSBuild (Release configuration)
+      # Build the solution with MSBuild (disable manifest signing)
       - name: Build Release
-        run: msbuild "NinjaMagisk Windows Tools.sln" -t:Build -p:Configuration=Release -v:normal
+        run: msbuild "NinjaMagisk Windows Tools.sln" -t:Build -p:Configuration=Release -p:SignManifests=false -v:normal
 
       # Verify build output
       - name: Check Build Output
