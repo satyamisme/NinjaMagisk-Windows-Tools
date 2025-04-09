@@ -17,6 +17,26 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Set up .NET SDK (required for dotnet-format)
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x' # Use a version compatible with your project
+
+      # Install dotnet-format
+      - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format
+
+      # Auto-correct syntax errors in C# files
+      - name: Auto-correct C# syntax
+        run: |
+          dotnet-format "NinjaMagisk Windows Tools.sln" --include "NinjaMagisk Windows Tools/*.cs" --fix-whitespace --fix-style --fix-analyzers
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add "NinjaMagisk Windows Tools/*.cs"
+          git commit -m "Auto-correct syntax errors in C# files" || echo "No changes to commit"
+          git push || echo "No push needed"
+
       # Set up MSBuild
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -43,7 +63,7 @@ jobs:
           Copy-Item -Path $sourceDll -Destination $targetDir -Force
           Write-Output "Copied $sourceDll to $targetDir"
 
-      # Build the solution with MSBuild (disable manifest signing)
+      # Build the solution with MSBuild
       - name: Build Release
         run: msbuild "NinjaMagisk Windows Tools.sln" -t:Build -p:Configuration=Release -p:SignManifests=false -v:normal
 
